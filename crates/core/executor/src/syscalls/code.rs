@@ -85,6 +85,9 @@ pub enum SyscallCode {
     /// Executes the `HINT_READ` precompile.
     HINT_READ = 0x00_00_00_F1,
 
+    /// Executes the `UINT32_SQR` precompile.
+    UINT32_SQR = 0x00_01_01_30,
+
     /// Executes the `UINT256_MUL` precompile.
     UINT256_MUL = 0x00_01_01_1D,
 
@@ -169,6 +172,7 @@ impl SyscallCode {
             0x00_00_00_1B => SyscallCode::VERIFY_SP1_PROOF,
             0x00_00_00_F0 => SyscallCode::HINT_LEN,
             0x00_00_00_F1 => SyscallCode::HINT_READ,
+            0x00_01_01_30 => SyscallCode::UINT32_SQR,
             0x00_01_01_1D => SyscallCode::UINT256_MUL,
             0x00_01_01_2F => SyscallCode::U256XU2048_MUL,
             0x00_01_01_20 => SyscallCode::BLS12381_FP_ADD,

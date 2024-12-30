@@ -107,6 +107,9 @@ pub enum SyscallCode {
     /// Executes the `HINT_READ` precompile.
     HINT_READ = 0x00_00_00_F1,
 
+    /// Executes the `UINT32_SQR` precompile.
+    UINT32_SQR = 0x00_01_01_30,
+
     /// Executes the `UINT256_MUL` precompile.
     UINT256_MUL = 0x00_01_01_1D,
 
@@ -184,6 +187,7 @@ impl SyscallCode {
             0x00_00_00_1B => SyscallCode::VERIFY_SP1_PROOF,
             0x00_00_00_F0 => SyscallCode::HINT_LEN,
             0x00_00_00_F1 => SyscallCode::HINT_READ,
+            0x00_01_01_3D => SyscallCode::UINT32_SQR,
             0x00_01_01_1D => SyscallCode::UINT256_MUL,
             0x00_01_01_2F => SyscallCode::U256X2048_MUL,
             0x00_01_01_20 => SyscallCode::BLS12381_FP_ADD,
@@ -386,6 +390,7 @@ pub fn default_syscall_map() -> HashMap<SyscallCode, Arc<dyn Syscall>> {
         SyscallCode::BLS12381_DOUBLE,
         Arc::new(WeierstrassDoubleAssignChip::<Bls12381>::new()),
     );
+    syscall_map.insert(SyscallCode::UINT32_SQR, Arc::new(Uint32SqrChip::new()));
     syscall_map.insert(SyscallCode::UINT256_MUL, Arc::new(Uint256MulChip::new()));
     syscall_map.insert(SyscallCode::U256X2048_MUL, Arc::new(U256x2048MulChip::new()));
     syscall_map.insert(
@@ -531,6 +536,9 @@ mod tests {
                 SyscallCode::BN254_ADD => assert_eq!(code as u32, sp1_zkvm::syscalls::BN254_ADD),
                 SyscallCode::BN254_DOUBLE => {
                     assert_eq!(code as u32, sp1_zkvm::syscalls::BN254_DOUBLE)
+                }
+                SyscallCode::UINT32_SQR => {
+                    assert_eq!(code as u32, sp1_zkvm::syscalls::UINT32_SQR)
                 }
                 SyscallCode::UINT256_MUL => {
                     assert_eq!(code as u32, sp1_zkvm::syscalls::UINT256_MUL)

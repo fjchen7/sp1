@@ -43,6 +43,7 @@ pub(crate) mod riscv_chips {
                 sha256::{ShaCompressChip, ShaExtendChip},
                 u256x2048_mul::U256x2048MulChip,
                 uint256::Uint256MulChip,
+                uint32::Uint32SqrChip,
                 weierstrass::{
                     WeierstrassAddAssignChip, WeierstrassDecompressChip,
                     WeierstrassDoubleAssignChip,
@@ -131,6 +132,8 @@ pub enum RiscvAir<F: PrimeField32> {
     Bls12381Double(WeierstrassDoubleAssignChip<SwCurve<Bls12381Parameters>>),
     /// A precompile for uint256 mul.
     Uint256Mul(Uint256MulChip),
+    /// A precompile for uint32 sqr.
+    Uint32Sqr(Uint32SqrChip),
     /// A precompile for u256x2048 mul.
     U256x2048Mul(U256x2048MulChip),
     /// A precompile for decompressing a point on the BLS12-381 curve.
@@ -271,6 +274,10 @@ impl<F: PrimeField32> RiscvAir<F> {
         >::new()));
         costs.insert(RiscvAirDiscriminants::Bls12381Double, bls12381_double.cost());
         chips.push(bls12381_double);
+
+        let uint32_sqr = Chip::new(RiscvAir::Uint32Sqr(Uint32SqrChip::default()));
+        costs.insert(RiscvAirDiscriminants::Uint32Sqr, uint32_sqr.cost());
+        chips.push(uint32_sqr);
 
         let uint256_mul = Chip::new(RiscvAir::Uint256Mul(Uint256MulChip::default()));
         costs.insert(RiscvAirDiscriminants::Uint256Mul, uint256_mul.cost());
@@ -506,6 +513,7 @@ impl<F: PrimeField32> RiscvAir<F> {
             Self::Secp256r1Double(_) => SyscallCode::SECP256R1_DOUBLE,
             Self::Sha256Compress(_) => SyscallCode::SHA_COMPRESS,
             Self::Sha256Extend(_) => SyscallCode::SHA_EXTEND,
+            Self::Uint32Sqr(_) => SyscallCode::UINT32_SQR,
             Self::Uint256Mul(_) => SyscallCode::UINT256_MUL,
             Self::U256x2048Mul(_) => SyscallCode::U256XU2048_MUL,
             Self::Bls12381Decompress(_) => SyscallCode::BLS12381_DECOMPRESS,

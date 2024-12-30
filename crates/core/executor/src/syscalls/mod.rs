@@ -32,6 +32,7 @@ use precompiles::{
         add::WeierstrassAddAssignSyscall, decompress::WeierstrassDecompressSyscall,
         double::WeierstrassDoubleAssignSyscall,
     },
+    uint32::Uint32SqrSyscall,
 };
 
 use sp1_curves::{
@@ -143,6 +144,8 @@ pub fn default_syscall_map() -> HashMap<SyscallCode, Arc<dyn Syscall>> {
         SyscallCode::BLS12381_DOUBLE,
         Arc::new(WeierstrassDoubleAssignSyscall::<Bls12381>::new()),
     );
+
+    syscall_map.insert(SyscallCode::UINT32_SQR, Arc::new(Uint32SqrSyscall));
 
     syscall_map.insert(SyscallCode::UINT256_MUL, Arc::new(Uint256MulSyscall));
 

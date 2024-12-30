@@ -14,6 +14,7 @@ mod sha_extend;
 mod sys;
 mod u256x2048_mul;
 mod uint256_mul;
+mod uint32_sqr;
 mod unconstrained;
 #[cfg(feature = "verify")]
 mod verify;
@@ -32,6 +33,7 @@ pub use secp256r1::*;
 pub use sha_compress::*;
 pub use sha_extend::*;
 pub use sys::*;
+pub use uint32_sqr::*;
 pub use u256x2048_mul::*;
 pub use uint256_mul::*;
 pub use unconstrained::*;
@@ -112,6 +114,9 @@ pub const HINT_READ: u32 = 0x00_00_00_F1;
 
 /// Executes `BLS12381_DECOMPRESS`.
 pub const BLS12381_DECOMPRESS: u32 = 0x00_00_01_1C;
+
+/// Executes the `UINT32_SQR` precompile.
+pub const UINT32_SQR: u32 = 0x00_01_01_30;
 
 /// Executes the `UINT256_MUL` precompile.
 pub const UINT256_MUL: u32 = 0x00_01_01_1D;
