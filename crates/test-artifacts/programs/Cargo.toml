@@ -36,6 +36,7 @@ members = [
   "sha2",
   "tendermint-benchmark",
   "u256x2048-mul",
+  "uint32-sqr",
   "uint256-arith",
   "uint256-mul",
   "verify-proof",

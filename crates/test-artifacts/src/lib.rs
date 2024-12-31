@@ -54,6 +54,8 @@ pub const BLS12381_DOUBLE_ELF: &[u8] = include_elf!("bls12381-double-test");
 
 pub const BLS12381_MUL_ELF: &[u8] = include_elf!("bls12381-mul-test");
 
+pub const UINT32_SQR_ELF: &[u8] = include_elf!("uint32-sqr-test");
+
 pub const UINT256_MUL_ELF: &[u8] = include_elf!("biguint-mul-test");
 
 pub const BLS12381_DECOMPRESS_ELF: &[u8] = include_elf!("bls-decompress-test");
