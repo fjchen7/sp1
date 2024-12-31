@@ -3,6 +3,8 @@ pub mod params;
 // pub mod polynomial;
 pub mod scalar_mul;
 pub mod uint256;
+
+pub mod uint32;
 pub mod utils;
 pub mod weierstrass;
 
